@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ember Twitter Example</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+
+<!-- Application template -->
+<script type="text/x-handlebars">
+    <div>
+        <ul class="nav horizontal-list">
+            <li>{{#linkTo "index"}}Home{{/linkTo}}</li>
+            <li>{{#linkTo "tweets"}}Find tweets{{/linkTo}}</li>
+            <li> {{#linkTo "about"}}About{{/linkTo}}</li>
+        </ul>
+    </div>
+    <h1>Ember.js twitter example</h1>
+    {{outlet}}
+</script>
+
+<!-- about template -->
+<script type="text/x-handlebars" id="about">
+    <div>
+        This is an Ember.js demo application.
+    </div>
+</script>
+
+<!-- tweets template -->
+<script type="text/x-handlebars" id="tweets">
+    <div id="frm">
+        <b>Load Tweets for: </b>
+        {{view App.SearchTextField placeholder="Twitter username" valueBinding="App.tweetsController.username"}}
+        <button {{action "loadTweets" target="App.tweetsController"}}>Go!</button>
+    </div>
+    <div id="content">
+        <div id="items">
+            <h3>Tweets</h3>
+            <ul> {{#each App.tweetsController}}
+                <li> <img {{bindAttr src="avatar"}} />
+                    <span>{{date}}</span>
+                    <h3>{{screen_name}}</h3>
+                    <p>{{text}}</p>
+                </li> {{/each}}
+            </ul>
+        </div>
+    </div>
+</script>
+
+<script src="js/libs/jquery-1.9.1.js"></script>
+<script src="js/libs/handlebars-1.0.0-rc.3.js"></script>
+<script src="js/libs/ember-1.0.0-rc.3.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
