@@ -1,12 +1,9 @@
 App = Ember.Application.create();
 
+// Tweet class
+App.Tweet = Ember.Object.extend({ avatar: null, screen_name: null, text: null, date: null });
 
-App.SearchTextField = Ember.TextField.extend({
-    insertNewline: function(){
-        App.tweetsController.loadTweets();
-    }
-});
-
+// Controller
 App.tweetsController = Ember.ArrayController.create({ content: [], username: '', loadTweets: function () {
     var me = this;
     var username = me.get("username");
@@ -29,8 +26,14 @@ App.tweetsController = Ember.ArrayController.create({ content: [], username: '',
 
     } } });
 
-App.Tweet = Ember.Object.extend({ avatar: null, screen_name: null, text: null, date: null });
+// Textfield
+App.SearchTextField = Ember.TextField.extend({
+    insertNewline: function(){
+        App.tweetsController.loadTweets();
+    }
+});
 
+// Routing
 App.Router.map(function() {
     this.route("tweets"); // short for: this.route("tweets", { path: "/tweets" });
     this.route("about");
